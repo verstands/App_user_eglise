@@ -10,14 +10,7 @@ function About() {
                     <div class="column">
                         <br />
                         <br />
-                        <p class="lead drop-cap">
-                            Non ratione vel. Non consequatur hic et labore et quia doloribus.
-                            Dolorum rerum dignissimos inventore id corporis rerum. At nesciunt
-                            ut error est soluta qui quibusdam blanditiis animi. Ad saepe quia at
-                            numquam temporibus quisquam ipsa. Ab omnis aut ratione ipsam voluptates
-                            quia. Veniam temporibus et. Aperiam sint veniam libero perferendis a.
-                            Quisquam optio quidem et.
-                        </p>
+                       
                         <div class="row">
                             <div class="col-md-6">
                                 <h2>Our Purpose.</h2>

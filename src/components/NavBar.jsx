@@ -1,9 +1,18 @@
 import { colors } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getProfile } from "./Actions/ProfileAction";
 
 const NavBar = () => {
-    
+    const [profile, setProfile] = useState([]);
+
+    useEffect(() => {
+        getProfile().then((membre) => {
+            setProfile(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
     return (
         <>
             <div class="td-search-popup" id="td-search-popup">
@@ -33,8 +42,9 @@ const NavBar = () => {
                                 <div class="topbar-social">
                                     <ul class="social-area social-area-2">
                                         
-                                        <Link>
-                                            <i className="fa fa-user-circle" style={{ fontSize: 25, color : "white" }}></i>
+                                        <Link to='/profile' style={{color : 'white', fontFamily : "fantasy"}}>
+                                            <i className="fa fa-user-circle" style={{ fontSize: 25, color : "white" }}> </i>
+                                            {profile.prenom } { profile.nom }
                                         </Link>
                                     </ul>
                                 </div>
@@ -52,9 +62,10 @@ const NavBar = () => {
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-7 text-md-right text-center">
-                                <a href="#" class="adbar-right">
-                                    <img src="assets/img/add/1.png" alt="img" />
-                                </a>
+                            <strong  style={{color: "white"}}>(1 Jean 4 : 7-8)</strong>
+                                <p style={{ fontFamily: "fantasy", color: "white" }}>
+                                    Bien-aimés, aimons nous les uns les autres; car l'amour est de Dieu, et quiconque aime est né de Dieu et connaît Dieu.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -75,12 +86,12 @@ const NavBar = () => {
                             <a class="search header-search" href="#"><i class="fa fa-search"></i></a>
                         </div>
                         <div class="collapse navbar-collapse" id="nextpage_main_menu">
-                            <ul class="navbar-nav menu-open">
+                            <ul class="navbar-nav menu-open" style={{fontFamily : "fantasy"}}>
                                 <li class="current-menu-item">
-                                    <Link to="/home">Evenement</Link>
+                                    <Link to="/home">Accueil</Link>
                                 </li>
                                 <li class="current-menu-item">
-                                    <Link to="#banner">Page Facebook</Link>
+                                    <Link to="/evenements">Evenements</Link>
                                 </li>
                                 <li class="current-menu-item">
                                     <Link to="/predication">Predications</Link>
@@ -102,8 +113,6 @@ const NavBar = () => {
                     </div>
                 </nav>
             </div>
-
-            
         </>
 
         

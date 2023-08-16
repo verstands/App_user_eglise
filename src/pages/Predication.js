@@ -62,12 +62,12 @@ const Predication = () => {
                                     <div class="col-lg-6 align-self-center">
                                         <div class="banner-details mt-4 mt-lg-0">
                                             <div class="post-meta-single">
-                                                <ul>
+                                                <ul style={{fontFamily : "fantasy"}}>
                                                     <button className='btn btn-primary' onClick={toggleFullScreen}>Activer le mode plein écran</button>
                                                     <li class="date"><i class="fa fa-clock-o"></i>{dateFormat(videoseul.created_at, 'dd/mm/yyyy')}</li>
                                                 </ul>
                                             </div>
-                                            <h2>{videoseul.titre}</h2>
+                                            <h2 style={{fontFamily : "fantasy"}}>{videoseul.titre}</h2>
                                         </div>
                                     </div>
                                 </>
@@ -95,10 +95,10 @@ const Predication = () => {
                                             </div>
                                         </div>
                                         <div class="details">
-                                            <h6 class="title"><a href="#">{vd.titre}</a></h6>
+                                            <h6 class="title" style={{fontFamily : "fantasy"}}><a href="#">{vd.titre}</a></h6>
                                             <div class="post-meta-single mt-3">
                                                 <ul>
-                                                    <li><i class="fa fa-clock-o"></i>{dateFormat(vd.created_at, 'dd/mm/yyyy')}</li>
+                                                    <li style={{fontFamily : "fantasy"}}><i class="fa fa-clock-o"></i>{dateFormat(vd.created_at, 'dd/mm/yyyy')}</li>
                                                 </ul>
                                             </div>
                                         </div>

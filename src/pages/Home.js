@@ -1,126 +1,95 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
+import { getEvenement, getSeulEvenement } from '../components/Actions/evenementAction';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
+    const [seulEvenement, setseulEvenement] = useState([]);
+    const [Evenement, setEvenement] = useState([]);
+
+    useEffect(() => {
+        getSeulEvenement().then((membre) => {
+            setseulEvenement(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    useEffect(() => {
+        getEvenement().then((membre) => {
+            setEvenement(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
     return (
         <>
             <NavBar />
-            <div class="pd-top-80 pd-bottom-50" id="grid">
+            <div class="bg-sky pd-top-80 pd-bottom-50" id="latest">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
-                                    <img src="assets/img/post/15.png" alt="img" />
-                                        <a class="tag-base tag-purple" href="#">Tech</a>
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single">
-                                        <p><i class="fa fa-clock-o"></i>08.22.2020</p>
+                        {
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="single-post-wrap style-overlay-bg">
+                                    <div class="thumb">
+                                        <img src="assets/img/post/9.png" alt="img" />
                                     </div>
-                                    <h6 class="title"><a href="#">Why Are the Offspring of Older </a></h6>
+                                    <div class="details">
+                                        <div class="post-meta-single mb-3">
+                                            <ul>
+                                                <li><a class="tag-base tag-blue" href="cat-fashion.html">Date</a></li>
+                                                <li><p><i class="fa fa-clock-o"></i>{seulEvenement.date}</p></li>
+                                            </ul>
+                                        </div>
+                                        <h6 style={{ fontFamily: "fantasy" }} class="title"><Link to={`/detail/${seulEvenement.id}`}>{seulEvenement && seulEvenement.titre && seulEvenement.titre.slice(0, 20)}...</Link></h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
-                                    <img src="assets/img/post/16.png" alt="img" />
-                                        <a class="tag-base tag-green" href="#">Tech</a>
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single">
-                                        <p><i class="fa fa-clock-o"></i>08.22.2020</p>
-                                    </div>
-                                    <h6 class="title"><a href="#">People Who Eat a Late Dinner May</a></h6>
-                                </div>
+                        }
+                        <div class="col-lg-6 col-sm-6">
+                            <div className="row">
+                                {
+                                    Evenement.map((evTs) => {
+                                        return (
+                                            <div className="col-md-6">
+                                                <div class="single-post-wrap">
+                                                    <div class="thumb">
+                                                        <img src="assets/img/post/10.png" alt="img" />
+                                                        <p class="btn-date"><i class="fa fa-clock-o"></i>{evTs.date}</p>
+                                                    </div>
+                                                    <div class="details">
+                                                        <h6 class="title"><Link style={{ fontFamily: "fantasy" }} to={`/detail/${evTs.id}`}>{evTs.titre.slice(0, 25)}...</Link></h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                
                             </div>
                         </div>
+
                         <div class="col-lg-3 col-sm-6">
-                            <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
-                                    <img src="assets/img/post/17.png" alt="img" />
-                                        <a class="tag-base tag-red" href="#">Tech</a>
+                            <div class="trending-post style-box">
+                                <div class="section-title">
+                                    <h6 class="title" style={{ fontFamily: "fantasy" }}>Rejoignez-nous</h6>
                                 </div>
-                                <div class="details">
-                                    <div class="post-meta-single">
-                                        <p><i class="fa fa-clock-o"></i>08.22.2020</p>
-                                    </div>
-                                    <h6 class="title"><a href="#">Kids eat more calories in </a></h6>
+                                <div class="social-area-list mb-4">
+                                    <ul>
+                                        <li><a class="facebook" href="#"><i class="fa fa-facebook social-icon"></i><span>12,300</span><span>Like</span> <i class="fa fa-plus"></i></a></li>
+                                        <li><a class="twitter" href="#"><i class="fa fa-twitter social-icon"></i><span>12,600</span><span>Followers</span> <i class="fa fa-plus"></i></a></li>
+                                        <li><a class="youtube" href="#"><i class="fa fa-youtube-play social-icon"></i><span>1,300</span><span>Subscribers</span> <i class="fa fa-plus"></i></a></li>
+                                        <li><a class="instagram" href="#"><i class="fa fa-instagram social-icon"></i><span>52,400</span><span>Followers</span> <i class="fa fa-plus"></i></a></li>
+                                        <li><a class="google-plus" href="#"><i class="fa fa-google social-icon"></i><span>19,101</span><span>Subscribers</span> <i class="fa fa-plus"></i></a></li>
+                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
-                                    <img src="assets/img/post/18.png" alt="img" />
-                                        <a class="tag-base tag-purple" href="#">Tech</a>
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single">
-                                        <p><i class="fa fa-clock-o"></i>08.22.2020</p>
-                                    </div>
-                                    <h6 class="title"><a href="#">The FAA will test drone </a></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
-                                    <img src="assets/img/post/19.png" alt="img" />
-                                        <a class="tag-base tag-red" href="#">Tech</a>
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single">
-                                        <p><i class="fa fa-clock-o"></i>08.22.2020</p>
-                                    </div>
-                                    <h6 class="title"><a href="#">Lifting Weights Makes Your Nervous</a></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
-                                    <img src="assets/img/post/20.png" alt="img" />
-                                        <a class="tag-base tag-blue" href="#">Tech</a>
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single">
-                                        <p><i class="fa fa-clock-o"></i>08.22.2020</p>
-                                    </div>
-                                    <h6 class="title"><a href="#">New, Remote Weight-Loss Method </a></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
-                                    <img src="assets/img/post/21.png" alt="img" />
-                                        <a class="tag-base tag-light-green" href="#">Tech</a>
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single">
-                                        <p><i class="fa fa-clock-o"></i>08.22.2020</p>
-                                    </div>
-                                    <h6 class="title"><a href="#">Social Connection Boosts Fitness App </a></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
-                                    <img src="assets/img/post/22.png" alt="img" />
-                                        <a class="tag-base tag-blue" href="#">Tech</a>
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single">
-                                        <p><i class="fa fa-clock-o"></i>08.22.2020</p>
-                                    </div>
-                                    <h6 class="title"><a href="#">Internet For Things - New results </a></h6>
+                                <div class="add-area">
+                                    <a href="#"><img class="w-100" src="assets/img/add/6.png" alt="img" /></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <a href='/evenements' style={{ fontFamily: "fantasy" }} className='btn btn-primary'>Voir plus</a>
                 </div>
             </div>
         </>
