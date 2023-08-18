@@ -10,6 +10,7 @@ import Profile from '../pages/Profile';
 import Detail from '../pages/Detail';
 import Paiement from '../pages/Paiement';
 import Page404 from '../pages/Page404';
+import Enregistrer from '../pages/Enregistrer';
 class IndexRoute extends Component {
     render(){
         return(
@@ -23,6 +24,7 @@ class IndexRoute extends Component {
                 <Route path="/profile"  element={<Profile />} />
                 <Route path="/detail/:id"  element={<Detail />} />
                 <Route path="/mespaiement"  element={<Paiement />} />
+                <Route path="/register"  element={<Enregistrer />} />
                 <Route path="/*"  element={<Page404 />} />
             </Routes> 
         );

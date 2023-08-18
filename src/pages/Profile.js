@@ -2,10 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import NavBar from '../components/NavBar'
 import { DeleteProfile, UpdateProfile, getProfile } from '../components/Actions/ProfileAction';
 import { Link } from 'react-router-dom';
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
     const [profile, setProfile] = useState([]);
     const form = useRef()
+    const navigate = useNavigate();
 
     useEffect(() => {
         getProfile().then((membre) => {
@@ -35,6 +38,12 @@ function Profile() {
         
         await UpdateProfile(postData, profile.id)
     }
+
+    const Sedeconnecter = () => {
+        localStorage.removeItem("token");
+        navigate('/') 
+        toast.error(`Vous etes deconnecter`)
+    }
     return (
         <>
             <NavBar />
@@ -52,6 +61,11 @@ function Profile() {
                                     <li class="list-group-item">
                                         <Link to="/mespaiement">
                                             <i className='fa fa-dollar'></i>  Mes paiements
+                                        </Link>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <Link onClick={Sedeconnecter}>
+                                            <i className='fa fa-sign-out'></i>  Se deconnecter
                                         </Link>
                                     </li>
                                     <li class="list-group-item">
@@ -128,7 +142,7 @@ function Profile() {
                                             />
                                     </div>
                                     <div className='col-md-6'>
-                                        <label htmlFor="">Date de naissace</label>
+                                       
                                         <input 
                                             type="hidden" 
                                             value={profile.datenaissance} 

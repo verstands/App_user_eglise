@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import { getEvenement, getSeulEvenement } from '../components/Actions/evenementAction';
 import { Link } from 'react-router-dom';
+import { Skeleton } from '@mui/material';
 
 const Home = () => {
     const [seulEvenement, setseulEvenement] = useState([]);
     const [Evenement, setEvenement] = useState([]);
+    const [loading, setloading] = useState(true);
 
     useEffect(() => {
         getSeulEvenement().then((membre) => {
@@ -18,6 +20,7 @@ const Home = () => {
     useEffect(() => {
         getEvenement().then((membre) => {
             setEvenement(membre);
+            setloading(false)
         }).catch((error) => {
             console.log(error);
         });
@@ -38,10 +41,20 @@ const Home = () => {
                                         <div class="post-meta-single mb-3">
                                             <ul>
                                                 <li><a class="tag-base tag-blue" href="cat-fashion.html">Date</a></li>
-                                                <li><p><i class="fa fa-clock-o"></i>{seulEvenement.date}</p></li>
+                                                <li>
+                                                    {seulEvenement && seulEvenement.date && (
+                                                        <i class="fa fa-clock-o"> {seulEvenement.date.slice(0, 20)}</i>
+                                                    )}
+                                                </li>
                                             </ul>
                                         </div>
-                                        <h6 style={{ fontFamily: "fantasy" }} class="title"><Link to={`/detail/${seulEvenement.id}`}>{seulEvenement && seulEvenement.titre && seulEvenement.titre.slice(0, 20)}...</Link></h6>
+                                        <h6 style={{ fontFamily: "fantasy" }} className="title">
+                                            {seulEvenement && seulEvenement.titre && (
+                                                <Link to={`/detail/${seulEvenement.id}`}>
+                                                    {seulEvenement.titre.slice(0, 20)}...
+                                                </Link>
+                                            )}
+                                        </h6>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +78,7 @@ const Home = () => {
                                         )
                                     })
                                 }
-                                
+
                             </div>
                         </div>
 
@@ -89,7 +102,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <a href='/evenements' style={{ fontFamily: "fantasy" }} className='btn btn-primary'>Voir plus</a>
+                    <Link to='/evenements' style={{ fontFamily: "fantasy" }} className='btn btn-primary'>Voir plus</Link>
                 </div>
             </div>
         </>

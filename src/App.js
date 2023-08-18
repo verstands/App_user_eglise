@@ -1,6 +1,7 @@
 import IndexRoute from "./routes/indexRoute";
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
+import './App.css';
 import 'react-toastify/dist/ReactToastify.css'
 
 

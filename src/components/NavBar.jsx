@@ -13,6 +13,8 @@ const NavBar = () => {
             console.log(error);
         });
     }, []);
+
+    
     return (
         <>
             <div class="td-search-popup" id="td-search-popup">
@@ -41,11 +43,12 @@ const NavBar = () => {
                             <div class="col-lg-6 col-md-5 mt-2 mt-md-0 text-md-right text-center">
                                 <div class="topbar-social">
                                     <ul class="social-area social-area-2">
-                                        
-                                        <Link to='/profile' style={{color : 'white', fontFamily : "fantasy"}}>
+                                        {profile && profile.prenom && profile.nom && (
+                                            <Link to={`/profile`} style={{color : 'white', fontFamily : "fantasy"}}>
                                             <i className="fa fa-user-circle" style={{ fontSize: 25, color : "white" }}> </i>
                                             {profile.prenom } { profile.nom }
-                                        </Link>
+                                            </Link>
+                                        )}
                                     </ul>
                                 </div>
                             </div>
@@ -88,7 +91,7 @@ const NavBar = () => {
                         <div class="collapse navbar-collapse" id="nextpage_main_menu">
                             <ul class="navbar-nav menu-open" style={{fontFamily : "fantasy"}}>
                                 <li class="current-menu-item">
-                                    <Link to="/home">Accueil</Link>
+                                    <Link to="/home" >Accueil</Link>
                                 </li>
                                 <li class="current-menu-item">
                                     <Link to="/evenements">Evenements</Link>

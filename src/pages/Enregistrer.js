@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import Swal from "sweetalert2";
-import Loading from "../loadingErr/Loading";
 import { toast } from "react-toastify";
-import '../style.css';
+import '../style.css'
 
-
-const Login = () => {
+function Enregistrer() {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
+    const [name, setname] = useState("");
     const navigate = useNavigate();
     const [loading, setloading] = useState(false);
 
     const handleConnecter = (e) => {
         e.preventDefault();
 
-        axios.post(`${process.env.REACT_APP_SERVICE_API}login`,
+        axios.post(`${process.env.REACT_APP_SERVICE_API}membre`,
             {
+
+                nom: name,
                 email: email,
+                postnom : 'NULL',
+                prenom : 'NULL',
+                sexe : 'H',
+                telephone : 'NULL',
+                adresse : 'NULL',
+                datenaissance : '00-00-0000',
+                etatcivil : 'NULL',
+                activite : 'NULL',
+                profession : 'NULL',
                 password: password
             }
         ).then((response) => {
@@ -35,7 +44,7 @@ const Login = () => {
             } else if (error?.response?.status === 500) {
                 setloading(false)
                 toast.error(`Erreur de la connexion`)
-            } else if (error?.response?.status === 404) {
+            } else if (error?.response?.status === 403) {
                 setloading(false)
                 toast.error(`Service non trouvée !!!`)
             } else if (error?.response?.status === 422) {
@@ -58,11 +67,19 @@ const Login = () => {
                             <div class="icon d-flex align-items-center justify-content-center">
                                 <span class="fa fa-user-o"></span>
                             </div>
-                            <h3 class="text-center mb-4">Se connecter</h3>
+                            <h3 class="text-center mb-4">S"eregistrer</h3>
                             <form action="" onSubmit={handleConnecter} class="login-form">
                                 <div class="form-group">
                                     <input
-                                        type="email"
+                                        type="text"
+                                        class="form-control rounded-left"
+                                        placeholder="Nom"
+                                        onChange={(e) => setname(e.target.value)}
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                        type="text"
                                         class="form-control rounded-left"
                                         placeholder="Email"
                                         onChange={(e) => setemail(e.target.value)}
@@ -84,7 +101,7 @@ const Login = () => {
                                         </label>
                                     </div>
                                     <div class="w-50 text-md-right">
-                                        <Link to="/register">S'enregistrer</Link>
+                                        <Link to="/">Se connecter</Link>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -105,4 +122,5 @@ const Login = () => {
         </section>
     );
 }
-export default Login;
+
+export default Enregistrer

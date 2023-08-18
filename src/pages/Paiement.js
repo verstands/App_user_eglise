@@ -2,13 +2,24 @@ import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import { DeleteProfile, getProfile } from '../components/Actions/ProfileAction';
 import { Link } from 'react-router-dom';
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+
 
 
 function Paiement() {
     const [Paiement, setPaiement] = useState([]);
+    const navigate = useNavigate();
 
     const supprimer = () => {
         DeleteProfile(1)
+    }
+
+    const Sedeconnecter = () => {
+        localStorage.removeItem("token");
+        navigate('/') 
+        toast.error(`Vous etes deconnecter`)
     }
     return (
         <>
@@ -27,6 +38,11 @@ function Paiement() {
                                     <li class="list-group-item">
                                         <Link>
                                             <i className='fa fa-dollar'></i>  Mes paiements
+                                        </Link>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <Link onClick={Sedeconnecter}>
+                                            <i className='fa fa-sign-out'></i>  Se deconnecter
                                         </Link>
                                     </li>
                                     <li class="list-group-item">

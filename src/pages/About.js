@@ -13,7 +13,7 @@ function About() {
                        
                         <div class="row">
                             <div class="col-md-6">
-                                <h2>Our Purpose.</h2>
+                                <h2 style={{ fontFamily: "fantasy" }}> Notre but.</h2>
                                 <p>
                                     Earum quia in. Sed deleniti sit aut molestiae eum consequatur
                                     quidem. Non beatae molestias eveniet repellendus doloribus odio
@@ -28,7 +28,7 @@ function About() {
                             </div>
                             <br />
                             <div class="col-md-6">
-                                <h2>Our Mission.</h2>
+                                <h2 style={{ fontFamily: "fantasy" }}>Notre mission.</h2>
                                 <p>
                                     Et unde et quibusdam laudantium consequatur. Necessitatibus ut
                                     ullam laudantium doloremque non qui expedita. Officia magnam
@@ -54,10 +54,10 @@ function About() {
                             </cite>
                         </blockquote>
                         <br />
-                        <h2>Our Values.</h2>
+                        <h2 style={{ fontFamily: "fantasy" }}>Nos valeurs.</h2>
                         <div class="row block-large-1-2 block-1000-full block-list">
                             <div class="column block-list__item">
-                                <h6>Identity in Christ</h6>
+                                <h6 style={{ fontFamily: "fantasy" }}>Identité en Christ</h6>
 
                                 <p>
                                     Earum quia in. Sed deleniti sit aut molestiae eum consequatur
@@ -70,7 +70,7 @@ function About() {
                             </div>
 
                             <div class="col-md-6">
-                                <h6>Church Is Family</h6>
+                                <h6 style={{ fontFamily: "fantasy" }}>Church Is Family</h6>
                                 <p>
                                     Quia cum tenetur et sequi eum molestiae expedita. Eum consectetur
                                     ut unde nam voluptatibus rerum impedit error tenetur. Temporibus
@@ -81,7 +81,7 @@ function About() {
                                 </p>
                             </div>
                             <div class="col-md-6">
-                                <h6>Kingdom Culture</h6>
+                                <h6 style={{ fontFamily: "fantasy" }}>Kingdom Culture</h6>
                                 <p>
                                     Cupiditate amet laboriosam ratione at et veritatis quo et explicabo.
                                     Illum nostrum voluptatem dignissimos laudantium. Et veniam qui.
@@ -93,9 +93,9 @@ function About() {
                             </div>
 
                             <div class="col-md-6">
-                                <h6>Spirit Led Life</h6>
+                                <h6 style={{ fontFamily: "fantasy" }}>Spirit Led Life</h6>
 
-                                <p>
+                                <p >
                                     Est voluptatem sequi debitis sunt et rerum. Officia ut possimus
                                     dolorum optio quis ducimus. Quo asperiores laudantium voluptatum
                                     numquam possimus. Saepe blanditiis voluptatem natus. Ipsam non
@@ -106,10 +106,10 @@ function About() {
                             </div>
                         </div>
                         <br />
-                        <h2>What We Believe.</h2>
+                        <h2 style={{ fontFamily: "fantasy" }}>What We Believe.</h2>
                         <div class="row block-large-1-2 block-1000-full block-list">
                             <div class="col-md-6">
-                                <h6>Maxime Quia Aut Dolorem.</h6>
+                                <h6 style={{ fontFamily: "fantasy" }}>Maxime Quia Aut Dolorem.</h6>
                                 <p>
                                     Earum quia in. Sed deleniti sit aut molestiae eum consequatur
                                     quidem. Non beatae molestias eveniet repellendus doloribus odio
@@ -120,7 +120,7 @@ function About() {
                                 </p>
                             </div>
                             <div class="col-md-6">
-                                <h6>
+                                <h6 style={{ fontFamily: "fantasy" }}>
                                     Neque Qui Veritatis.
                                 </h6>
                                 <p>
@@ -133,7 +133,7 @@ function About() {
                                 </p>
                             </div>
                             <div class="col-md-6">
-                                <h6>
+                                <h6 style={{ fontFamily: "fantasy" }}>
                                     Eos Quos Temporibus
                                 </h6>
                                 <p>
@@ -146,7 +146,7 @@ function About() {
                                 </p>
                             </div>
                             <div class="col-md-6">
-                                <h6>
+                                <h6 style={{ fontFamily: "fantasy" }}>
                                     Dolorum Qui Ipsam Maxime.
                                 </h6>
                                 <p>
@@ -160,16 +160,16 @@ function About() {
                             </div>
                         </div>
                         <br />
-                        <h2>Meet Our Team.</h2>
+                        <h2 style={{ fontFamily: "fantasy" }}>Meet Our Team.</h2>
                         <div class="row block-large-1-2 block-tab-full church-staff">
                             <div class="column church-staff__item">
                                 <div class="church-staff__header">
                                     <div class="church-staff__picture">
                                         <img src="images/avatars/user-01.jpg" alt="" />
                                     </div>
-                                    <h4 class="church-staff__name">
+                                    <h4 class="church-staff__name" style={{ fontFamily: "fantasy" }}>
                                         Jonathan Doe
-                                        <span class="church-staff__position">
+                                        <span class="church-staff__position" style={{ fontFamily: "fantasy" }}>
                                             Lead Pastor
                                         </span>
                                     </h4>
@@ -186,7 +186,7 @@ function About() {
                                     <div class="church-staff__picture">
                                         <img src="images/avatars/user-02.jpg" alt="" />
                                     </div>
-                                    <h4 class="church-staff__name">
+                                    <h4 class="church-staff__name" style={{ fontFamily: "fantasy" }}>
                                         Jane Doe
                                         <span class="church-staff__position">
                                             Lead Pastor
@@ -205,7 +205,7 @@ function About() {
                                     <div class="church-staff__picture">
                                         <img src="images/avatars/user-03.jpg" alt="" />
                                     </div>
-                                    <h4 class="church-staff__name">
+                                    <h4 class="church-staff__name" style={{ fontFamily: "fantasy" }}>
                                         Charles Spurgeon
                                         <span class="church-staff__position">
                                             Associate Pastor
@@ -223,7 +223,7 @@ function About() {
                                     <div class="church-staff__picture">
                                         <img src="images/avatars/user-04.jpg" alt="" />
                                     </div>
-                                    <h4 class="church-staff__name">
+                                    <h4 class="church-staff__name" style={{ fontFamily: "fantasy" }}>
                                         Martin Luther
                                         <span class="church-staff__position">
                                             Associate Pastor
@@ -241,7 +241,7 @@ function About() {
                                     <div class="church-staff__picture">
                                         <img src="images/avatars/user-05.jpg" alt="" />
                                     </div>
-                                    <h4 class="church-staff__name">
+                                    <h4 class="church-staff__name" style={{ fontFamily: "fantasy" }}>
                                         John Wesley
                                         <span class="church-staff__position">
                                             Youth Pastor
@@ -259,7 +259,7 @@ function About() {
                                     <div class="church-staff__picture">
                                         <img src="images/avatars/user-06.jpg" alt="" />
                                     </div>
-                                    <h4 class="church-staff__name">
+                                    <h4 class="church-staff__name" style={{ fontFamily: "fantasy" }}>
                                         Aimee Semple McPherson
                                         <span class="church-staff__position">
                                             Kids Church Director

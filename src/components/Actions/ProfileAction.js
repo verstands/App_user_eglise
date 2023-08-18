@@ -22,6 +22,7 @@ export const getProfile = () => {
         });
 }
 
+
 export const DeleteProfile = () => {
     Swal.fire({
         title: 'Êtes-vous sûr de vouloir supprimer le compte ?',
