@@ -15,7 +15,6 @@ const Login = () => {
 
     const handleConnecter = (e) => {
         e.preventDefault();
-
         axios.post(`${process.env.REACT_APP_SERVICE_API}login`,
             {
                 email: email,
@@ -27,6 +26,7 @@ const Login = () => {
             localStorage.setItem("token", tokenT)
             setloading(false)
             navigate('/home')
+            window.location.reload();
             toast.success(`success`)
         }).catch((error) => {
             if (error?.response?.status === 401) {

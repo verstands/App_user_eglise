@@ -64,7 +64,7 @@ function Profile() {
                                         </Link>
                                     </li>
                                     <li class="list-group-item">
-                                        <Link onClick={Sedeconnecter}>
+                                        <Link to="/" onClick={Sedeconnecter}>
                                             <i className='fa fa-sign-out'></i>  Se deconnecter
                                         </Link>
                                     </li>

@@ -5,6 +5,7 @@ import { getProfile } from "./Actions/ProfileAction";
 
 const NavBar = () => {
     const [profile, setProfile] = useState([]);
+    const [active, setactive] = useState([]);
 
     useEffect(() => {
         getProfile().then((membre) => {
@@ -104,6 +105,10 @@ const NavBar = () => {
                                 </li>
                                 <li class="">
                                     <Link to="/don">Don</Link>
+                                </li>
+                                <li class="">
+                                    <Link to="/chat">forums de 
+discussion</Link>
                                 </li>
                             </ul>
                         </div>

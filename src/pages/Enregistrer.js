@@ -13,10 +13,8 @@ function Enregistrer() {
 
     const handleConnecter = (e) => {
         e.preventDefault();
-
         axios.post(`${process.env.REACT_APP_SERVICE_API}membre`,
             {
-
                 nom: name,
                 email: email,
                 postnom : 'NULL',
@@ -31,12 +29,8 @@ function Enregistrer() {
                 password: password
             }
         ).then((response) => {
-            let token = JSON.stringify(response.data.token);
-            let tokenT = token.substring(1, token.length - 1);
-            localStorage.setItem("token", tokenT)
-            setloading(false)
-            navigate('/home')
-            toast.success(`success`)
+            navigate('/')
+            toast.success(`Utilisateur crée`)
         }).catch((error) => {
             if (error?.response?.status === 401) {
                 setloading(false)
@@ -45,8 +39,7 @@ function Enregistrer() {
                 setloading(false)
                 toast.error(`Erreur de la connexion`)
             } else if (error?.response?.status === 403) {
-                setloading(false)
-                toast.error(`Service non trouvée !!!`)
+                toast.error(error.response.data.message)
             } else if (error?.response?.status === 422) {
                 setloading(false)
                 toast.error(`${error.response.data.message}`)

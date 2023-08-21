@@ -10,7 +10,7 @@ function Don() {
                     <div class="church-staff__picture">
                         <img src="images/avatars/user-06.jpg" alt="" />
                     </div>
-                    <h4 className="church-staff__name text-center" >
+                    <h4 className="church-staff__name text-center" style={{ fontFamily: "fantasy" }}>
                         Faire un Don
                     </h4>
                 </div>
@@ -20,15 +20,15 @@ function Don() {
                             <div className="col-md-6">
                                 <form action="">
                                     <div className="form-group">
-                                        <label htmlFor="">Type de don</label>
-                                        <select className="form-control" name="" id="">
+                                        <label htmlFor="" style={{ fontFamily: "fantasy" }}>Type de don</label>
+                                        <select style={{ fontFamily: "fantasy" }} className="form-control" name="" id="">
                                             <option>Construction</option>
                                             <option>Offrande</option>
                                         </select>
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="">Type de paiement</label>
-                                        <select name="" className="form-control" id="">
+                                        <label htmlFor="" style={{ fontFamily: "fantasy" }}>Type de paiement</label>
+                                        <select name="" style={{ fontFamily: "fantasy" }} className="form-control" id="">
                                             <option>Mobile money</option>
                                             <option>Carte visa</option>
                                         </select>
