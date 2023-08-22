@@ -12,6 +12,7 @@ import Paiement from '../pages/Paiement';
 import Page404 from '../pages/Page404';
 import Enregistrer from '../pages/Enregistrer';
 import Ggroupe from '../pages/Ggroupe';
+import VideoDetail from '../pages/VideoDetail';
 class IndexRoute extends Component {
     render(){
         return(
@@ -27,6 +28,7 @@ class IndexRoute extends Component {
                 <Route path="/mespaiement"  element={<Paiement />} />
                 <Route path="/register"  element={<Enregistrer />} />
                 <Route path="/chat"  element={<Ggroupe />} />
+                <Route path="/VideoD/:id"  element={<VideoDetail />} />
                 <Route path="/*"  element={<Page404 />} />
             </Routes> 
         );

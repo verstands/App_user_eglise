@@ -31,7 +31,6 @@ export const addChat = (postData) => {
                     Authorization: token
                 }
             }).then((response) => {
-                toast.success(`${response.data.message}`)
             }).catch((error) => {
 
                 if (error.response && error.response.status === 422) {

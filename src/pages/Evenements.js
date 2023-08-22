@@ -28,11 +28,11 @@ const Evenements = () => {
                                     <div class="col-lg-4 col-sm-6">
                                         <div class="single-post-wrap">
                                             <div class="thumb">
-                                                <img src="assets/img/post/10.png" alt="img" />
+                                                <img src= {eve.image} width={300} height={300}/>
                                                 <p class="btn-date"><i class="fa fa-clock-o"></i>{eve.date}</p>
                                             </div>
                                             <div class="details">
-                                                <h6 class="title"><Link to={`/detail/${eve.id}`}>{eve.titre.slice(0, 30)}...</Link></h6>
+                                                <h6 class="title"><Link to={`/detail/${eve.id}`}>{eve.titre.slice(0, 100)}...</Link></h6>
                                             </div>
                                         </div>
                                     </div>

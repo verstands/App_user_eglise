@@ -41,6 +41,7 @@
   box-sizing: border-box;
 }
 
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -12077,7 +12078,9 @@ h5,
   padding: 10px;
   position: relative;
 }
-
+.msg_cotainer_send:hover {
+  display: block;
+}
 .msg_head {
   position: relative;
 }
@@ -12151,4 +12154,46 @@ margin: 0;
 		font-size: 20px;
 		cursor: pointer;
 		margin-right: 20px;
-	}
+}
+.activeLien {
+  border-bottom: #721c24 5px solid;
+  border-radius: 20%;
+}
+.NavFiltre{
+  position: absolute;
+  right: 13%;
+  background-color: #f2f2f2;
+  width: 17%;
+  z-index: 1;
+  text-align: left;
+  padding: 10px;
+  overflow-y: scroll;
+  height: 300px;
+  color :black;
+}
+.NavFiltre::-webkit-scrollbar{
+  width: 5px;
+}
+
+.NavFiltre::-webkit-scrollbar-thumb{
+  background-color: #5a6268;
+}
+
+-webkit-scrollbar-thumb:hover{
+
+}
+.NavFiltres{
+  overflow-y: scroll;
+  height: 400px;
+}
+.NavFiltres::-webkit-scrollbar{
+  width: 5px;
+}
+
+.NavFiltres::-webkit-scrollbar-thumb{
+  background-color: #5a6268;
+}
+
+-webkit-scrollbar-thumb:hover{
+
+}

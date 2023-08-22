@@ -1,11 +1,28 @@
 import { colors } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProfile } from "./Actions/ProfileAction";
+import zIndex from "@mui/material/styles/zIndex";
+import { getVideo } from "./Actions/videoAction";
 
 const NavBar = () => {
     const [profile, setProfile] = useState([]);
-    const [active, setactive] = useState([]);
+    const [predication, setpredication] = useState([]);
+    const [activeL, setactive] = useState('home');
+    const [searchTerm, setSearchTerm] = useState("");
+    const [disNow, setdisNow] = useState('none')
+
+    const navFiltreRef = useRef(null);
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+        if(searchTerm.length > 0){
+            setdisNow('block')
+        }
+        if(searchTerm === ''){
+            setdisNow('none')
+            console.log(disNow)
+        }
+    };
 
     useEffect(() => {
         getProfile().then((membre) => {
@@ -15,7 +32,28 @@ const NavBar = () => {
         });
     }, []);
 
-    
+    useEffect(() => {
+        getVideo().then((membre) => {
+            setpredication(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    const handleClickOutside = (event) => {
+        if (navFiltreRef.current && !navFiltreRef.current.contains(event.target)) {
+            setdisNow('none');
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
+
+
     return (
         <>
             <div class="td-search-popup" id="td-search-popup">
@@ -36,7 +74,7 @@ const NavBar = () => {
                                 <div class="topbar-menu text-md-left text-center">
                                     <ul class="align-self-center">
                                         <li><a href="#">
-                                            
+
                                         </a></li>
                                     </ul>
                                 </div>
@@ -45,9 +83,9 @@ const NavBar = () => {
                                 <div class="topbar-social">
                                     <ul class="social-area social-area-2">
                                         {profile && profile.prenom && profile.nom && (
-                                            <Link to={`/profile`} style={{color : 'white', fontFamily : "fantasy"}}>
-                                            <i className="fa fa-user-circle" style={{ fontSize: 25, color : "white" }}> </i>
-                                            {profile.prenom } { profile.nom }
+                                            <Link to={`/profile`} style={{ color: 'white', fontFamily: "fantasy" }}>
+                                                <i className="fa fa-user-circle" style={{ fontSize: 25, color: "white" }}> </i>
+                                                {profile.prenom} {profile.nom}
                                             </Link>
                                         )}
                                     </ul>
@@ -66,7 +104,7 @@ const NavBar = () => {
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-7 text-md-right text-center">
-                            <strong  style={{color: "white"}}>(1 Jean 4 : 7-8)</strong>
+                                <strong style={{ color: "white" }}>(1 Jean 4 : 7-8)</strong>
                                 <p style={{ fontFamily: "fantasy", color: "white" }}>
                                     Bien-aimés, aimons nous les uns les autres; car l'amour est de Dieu, et quiconque aime est né de Dieu et connaît Dieu.
                                 </p>
@@ -89,41 +127,69 @@ const NavBar = () => {
                         <div class="nav-right-part nav-right-part-mobile">
                             <a class="search header-search" href="#"><i class="fa fa-search"></i></a>
                         </div>
-                        <div class="collapse navbar-collapse" id="nextpage_main_menu">
-                            <ul class="navbar-nav menu-open" style={{fontFamily : "fantasy"}}>
-                                <li class="current-menu-item">
-                                    <Link to="/home" >Accueil</Link>
+                        <div className="collapse navbar-collapse" id="nextpage_main_menu">
+                            <ul className="navbar-nav menu-open" style={{ fontFamily: "fantasy" }}>
+                                <li className={`current-menu-item`} style={activeL === 'home' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('home')}>
+                                    <Link to={"/home"}>Accueil</Link>
                                 </li>
-                                <li class="current-menu-item">
+                                <li className="current-menu-item" style={activeL === 'evenements' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('evenements')}>
                                     <Link to="/evenements">Evenements</Link>
                                 </li>
-                                <li class="current-menu-item">
-                                    <Link to="/predication">Predications</Link>
+                                <li className={`current-menu-item`} style={activeL === 'predication' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('predication')}>
+                                    <Link to={"/predication"}>Predications</Link>
                                 </li>
-                                <li class="current-menu-item">
-                                    <Link to="/eglise">Notre eglise</Link>
+                                <li className={`current-menu-item`} style={activeL === 'eglise' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('eglise')}>
+                                    <Link to={"/eglise"}>Notre eglise</Link>
                                 </li>
-                                <li class="">
-                                    <Link to="/don">Don</Link>
+                                <li className={`current-menu-item`} style={activeL === 'don' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('don')}>
+                                    <Link to={"/don"}>Don</Link>
                                 </li>
-                                <li class="">
-                                    <Link to="/chat">forums de 
-discussion</Link>
+                                <li className={`current-menu-item`} style={activeL === 'chat' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('chat')}>
+                                    <Link to={"/chat"}>forums de discussion</Link>
                                 </li>
                             </ul>
                         </div>
                         <div class="nav-right-part nav-right-part-desktop">
                             <div class="menu-search-inner">
-                                <input type="text" placeholder="Search For" />
+                                <input 
+                                    type="text"
+                                     placeholder="Rechercher..." 
+                                     value={searchTerm}
+                                     onChange={handleSearch}
+                                     />
                                 <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </div>
                 </nav>
+                <div className="NavFiltre" style={{display : disNow}} ref={navFiltreRef}>
+                    {
+                        Array.isArray(predication) && predication
+                            .filter((data) => {
+                                if (typeof data.titre !== 'string'
+                                ) {
+                                    return false; // ignore non-string values
+                                }
+                                return data.titre.toLowerCase().includes(searchTerm.toLowerCase())
+
+                            })
+                            .map((pv) => {
+                                return (
+                                    <>
+                                    <Link to={`/VideoD/${pv.id}`} style={{color
+                                     : "black"}}>
+                                        <i className="fa fa-video-camera"> </i>
+                                        {pv.titre}
+                                    </Link><br />
+                                    </>
+                                )
+                            })
+                    }
+                </div>
             </div>
         </>
 
-        
+
     )
 }
 

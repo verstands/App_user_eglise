@@ -13,9 +13,10 @@ function Ggroupe() {
     const [profile, setProfile] = useState([]);
     const [groupeId, setgroupeId] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [champchat,setchampchat ] = useState('');
-    const [idgroupe,setidgroupe ] = useState('');
-    const [activeCss,setactiveCss ] = useState(null);
+    const [champchat, setchampchat] = useState('');
+    const [idgroupe, setidgroupe] = useState('');
+    const [activeCss, setactiveCss] = useState(null);
+    const [showIcon, setShowIcon] = useState(false);
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -62,7 +63,7 @@ function Ggroupe() {
         if (messageDate.isSame(today, 'd')) {
             return messageDateTime.format('HH:mm');
         } else if (messageDate.isSame(yesterday, 'd')) {
-            return 'Hier';
+            return 'Hier' + messageDateTime.format('HH:mm');
         } else {
             return messageDate.format('DD/MM/YYYY');
         }
@@ -87,6 +88,18 @@ function Ggroupe() {
         }
     }
 
+    const handleMouseEnter = () => {
+        setShowIcon(true);
+    };
+
+    const handleMouseLeave = () => {
+        setShowIcon(false);
+    };
+    const [showDropdown, setShowDropdown] = useState(false);
+    const handleIconClick = () => {
+        setShowDropdown(!showDropdown);
+    };
+
     return (
         <>
             <NavBar />
@@ -95,6 +108,7 @@ function Ggroupe() {
                 <div class="row justify-content-center h-100">
                     <div class="col-md-4 col-xl-3 chat"><div class="card mb-sm-3 mb-md-0 contacts_card">
                         <div class="card-header">
+                            <h5 style={{ fontFamily: 'fantasy' }}>Les groupes de l'eglise</h5>
                             <div class="input-group">
                                 <input
                                     type="text"
@@ -124,7 +138,7 @@ function Ggroupe() {
                                         .map((gp, index) => {
                                             return (
                                                 <Link onClick={() => handleOnclick(gp.id)}>
-                                                    <li className={activeCss === gp.id ? "active" : "" }>
+                                                    <li className={activeCss === gp.id ? "active" : ""}>
                                                         <div class="d-flex bd-highlight">
                                                             <div class="img_cont">
                                                                 <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img" />
@@ -154,7 +168,7 @@ function Ggroupe() {
                             <div class="card-header msg_head" >
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
-                                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img" />
+                                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img"/>
                                         <span class="online_icon"></span>
                                     </div>
                                     <div class="user_info">
@@ -176,7 +190,7 @@ function Ggroupe() {
                                     </ul>
                                 </div>
                             </div>
-                            <div class="card-body msg_card_body" style={{ height: '500px', overflowY: 'scroll' }}>
+                            <div class="card-body msg_card_body NavFiltres">
                                 {
                                     Array.isArray(chat) && chat.map((ms) => {
                                         const isMyMessage = ms.send.id === profile.id; // Vérifier si c'est mon message
@@ -187,8 +201,16 @@ function Ggroupe() {
                                                         <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg" />
                                                     </div>
                                                 )}
-                                                <div className={isMyMessage ? "msg_cotainer_send" : "msg_cotainer"}>
+                                                <div className={isMyMessage ? "msg_cotainer_send" : "msg_cotainer"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                                                     {ms.message}
+                                                    <i className={`fa btn fa-ellipsis-v dropdown ${showDropdown ? 'active' : ''}`} onClick={handleIconClick}></i>
+                                                    {showDropdown && (
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#">Action</a>
+                                                            <a class="dropdown-item" href="#">Another action</a>
+                                                            <a class="dropdown-item" href="#">Something else here</a>
+                                                        </div>
+                                                    )}
                                                     <span class={isMyMessage ? "msg_time_send" : "msg_time"}>{ms.send.id === isMyMessage ? formatDate(ms.created_at) : formatDate(ms.created_at)}</span>
                                                 </div>
                                             </div>

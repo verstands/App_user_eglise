@@ -9,6 +9,29 @@ const Home = () => {
     const [Evenement, setEvenement] = useState([]);
     const [loading, setloading] = useState(true);
 
+    function convertImageToBase64(imageUrl) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+
+                const dataURL = canvas.toDataURL('image/png');
+                resolve(dataURL);
+            };
+
+            img.onerror = reject;
+            img.src = imageUrl;
+            alert(img.src);
+        });
+    }
+
     useEffect(() => {
         getSeulEvenement().then((membre) => {
             setseulEvenement(membre);
@@ -25,22 +48,50 @@ const Home = () => {
             console.log(error);
         });
     }, []);
+
+    const [imageBase64, setImageBase64] = useState('');
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+    
+        reader.onloadend = () => {
+          const base64String = reader.result;
+          setImageBase64(base64String);
+        };
+    
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+
+        alert(imageBase64)
+        console.log(imageBase64)
+      };
     return (
         <>
             <NavBar />
+            <div style={{display : 'none'}}>
+                <input type="file" accept="image/*" onChange={handleImageUpload} />
+                {imageBase64 && (
+                    <img src={imageBase64} alt="Uploaded" style={{ maxWidth: '200px' }} />
+                )}
+                <img src={imageBase64} alt="Uploaded" style={{ maxWidth: '200px' }} />
+
+            </div>
             <div class="bg-sky pd-top-80 pd-bottom-50" id="latest">
                 <div class="container">
+                   <h4 style={{fontFamily : 'fantasy'}}>Les evenements recents</h4>
+                   <br />
                     <div class="row">
                         {
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single-post-wrap style-overlay-bg">
                                     <div class="thumb">
-                                        <img src="assets/img/post/9.png" alt="img" />
+                                        <img src={seulEvenement.image} alt="img"  />
                                     </div>
                                     <div class="details">
                                         <div class="post-meta-single mb-3">
                                             <ul>
-                                                <li><a class="tag-base tag-blue" href="cat-fashion.html">Date</a></li>
+                                                <li><Link class="tag-base tag-blue" to={`/detail/${seulEvenement.id}`}>Voir plus</Link></li>
                                                 <li>
                                                     {seulEvenement && seulEvenement.date && (
                                                         <i class="fa fa-clock-o"> {seulEvenement.date.slice(0, 20)}</i>
@@ -67,11 +118,11 @@ const Home = () => {
                                             <div className="col-md-6">
                                                 <div class="single-post-wrap">
                                                     <div class="thumb">
-                                                        <img src="assets/img/post/10.png" alt="img" />
+                                                        <img src={evTs.image}/>
                                                         <p class="btn-date"><i class="fa fa-clock-o"></i>{evTs.date}</p>
                                                     </div>
                                                     <div class="details">
-                                                        <h6 class="title"><Link style={{ fontFamily: "fantasy" }} to={`/detail/${evTs.id}`}>{evTs.titre.slice(0, 25)}...</Link></h6>
+                                                        <h6 class="title"><Link style={{ fontFamily: "fantasy" }} to={`/detail/${evTs.id}`}>{evTs.titre.slice(0, 45)}...</Link></h6>
                                                     </div>
                                                 </div>
                                             </div>

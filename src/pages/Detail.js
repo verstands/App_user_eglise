@@ -23,7 +23,7 @@ const Detail = () => {
                     <div class="row">
                         <div class="col-lg-6">
                         <div class="thumb after-left-top">
-                            <img src="assets/img/banner/1.png" alt="img" />
+                            <img src={profile.image} alt="img" />
                         </div>
                         </div>
                         <div class="col-lg-6 align-self-center">
