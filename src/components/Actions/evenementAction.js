@@ -1,9 +1,11 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 let token = `Bearer ${localStorage.getItem("token")}`;
+const navigateTo = useNavigate;
 export const getEvenement = () => {
     return axios.get(`${process.env.REACT_APP_SERVICE_API}evenements`,
         {
@@ -18,10 +20,14 @@ export const getEvenement = () => {
             return response.data.data;
         })
         .catch((error) => {
-
+            if (error.response && error.response.status === 401) {
+                window.location.href = "/";
+            } else {
+                toast.error(`${error.response.data.message}`)
+            }
         });
 }
-export const getSeulEvenement = () => {
+export const getSeulEvenement = (navigate) => {
     return axios.get(`${process.env.REACT_APP_SERVICE_API}seulEvenement`,
         {
             headers: {
@@ -35,7 +41,11 @@ export const getSeulEvenement = () => {
             return response.data.data;
         })
         .catch((error) => {
-
+            if (error.response && error.response.status === 401) {
+                window.location.href = "/";
+            } else {
+                toast.error(`${error.response.data.message}`)
+            }
         });
 }
 
@@ -53,7 +63,11 @@ export const getEvenementTous = () => {
             return response.data.data;
         })
         .catch((error) => {
-
+            if (error.response && error.response.status === 401) {
+                window.location.href = "/";
+            } else {
+                toast.error(`${error.response.data.message}`)
+            }
         });
 }
 
@@ -71,6 +85,10 @@ export const getEvenementId = (id) => {
             return response.data.data;
         })
         .catch((error) => {
-           
+            if (error.response && error.response.status === 401) {
+                window.location.href = "/";
+            } else {
+                toast.error(`${error.response.data.message}`)
+            }
         });
 }

@@ -17,13 +17,32 @@ function Don() {
                 <p>
                     <div className="container">
                         <div className="row justify-content-center">
-                            <div className="col-md-6">
+                            <div className="col-md-6" >
                                 <form action="">
-                                    <div className="form-group">
+                                <div className="form-group">
                                         <label htmlFor="" style={{ fontFamily: "fantasy" }}>Type de don</label>
                                         <select style={{ fontFamily: "fantasy" }} className="form-control" name="" id="">
                                             <option>Construction</option>
                                             <option>Offrande</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="" style={{ fontFamily: "fantasy" }}>Numero de telephone</label>
+                                        <input type="number" className='form-control' placeholder='Exemple : 243xxxxxxx' />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="" style={{ fontFamily: "fantasy" }}>Montant</label>
+                                        <input type="number" className='form-control' />
+                                    </div>
+                                    <div className="form-group">
+                                       
+                                        <input  type="hidden" className='form-control' />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="" style={{ fontFamily: "fantasy" }}>Devise</label>
+                                        <select style={{ fontFamily: "fantasy" }} className="form-control" name="" id="">
+                                            <option>CDF</option>
+                                            <option>USD</option>
                                         </select>
                                     </div>
                                     <div className="form-group">
@@ -33,7 +52,7 @@ function Don() {
                                             <option>Carte visa</option>
                                         </select>
                                     </div>
-                                    <button className="btn btn-primary">Valider</button>
+                                    <button className="btn btn-primary btn-block">Valider</button>
                                 </form>
                             </div>
                         </div>

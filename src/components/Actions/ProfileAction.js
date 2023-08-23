@@ -18,7 +18,11 @@ export const getProfile = () => {
             return response.data.data;
         })
         .catch((error) => {
-
+            if (error.response && error.response.status === 401) {
+                window.location.href = "/";
+            } else {
+                toast.error(`${error.response.data.message}`)
+            }
         });
 }
 
@@ -48,14 +52,18 @@ export const DeleteProfile = () => {
                     });
                 })
                 .catch((error) => {
-                    alert(error);
+                    if (error.response && error.response.status === 401) {
+                        window.location.href = "/";
+                    } else {
+                        toast.error(`${error.response.data.message}`)
+                    }
                 });
         }
     });
 }
 
 export const UpdateProfile = (postData, id) => {
-     axios.put(`${process.env.REACT_APP_SERVICE_API}profil/${id}`,postData,
+    axios.put(`${process.env.REACT_APP_SERVICE_API}profil/${id}`, postData,
         {
             headers: {
                 Accept: 'application/json',
@@ -69,6 +77,8 @@ export const UpdateProfile = (postData, id) => {
                 toast.error(`${error.response.data.message}`)
             } else if (error.response.status === 500) {
                 toast.error(`${error.response.data.message}`)
+            }else if(error.response.status === 401){
+                window.location.href = "/"
             } else {
                 toast.error(`${error.response.data.message}`)
             }

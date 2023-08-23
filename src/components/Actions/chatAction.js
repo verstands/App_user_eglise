@@ -18,7 +18,11 @@ export const getChatInterne = (groupe) => {
             return response.data.data;
         })
         .catch((error) => {
-            alert(error)
+            if (error.response && error.response.status === 401) {
+                window.location.href = "/";
+            } else {
+                toast.error(`${error.response.data.message}`)
+            }
         });
 }
 
@@ -37,6 +41,8 @@ export const addChat = (postData) => {
                     toast.error(`${error.response.data.message}`)
                 } else if (error.response.status === 500) {
                     toast.error(`${error.response.data.message}`)
+                }else if(error.response.status === 401){
+                    window.location.href = "/";
                 } else {
                     toast.error(`${error.response.data.message}`)
                 }

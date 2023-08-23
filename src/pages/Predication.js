@@ -32,17 +32,17 @@ const Predication = () => {
     function toggleFullScreen() {
         const iframe = document.querySelector('iframe');
         if (iframe) {
-          if (iframe.requestFullscreen) {
-            iframe.requestFullscreen();
-          } else if (iframe.mozRequestFullScreen) {
-            iframe.mozRequestFullScreen();
-          } else if (iframe.webkitRequestFullscreen) {
-            iframe.webkitRequestFullscreen();
-          } else if (iframe.msRequestFullscreen) {
-            iframe.msRequestFullscreen();
-          }
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
         }
-      }
+    }
     return (
         <>
             <NavBar />
@@ -62,12 +62,12 @@ const Predication = () => {
                                     <div class="col-lg-6 align-self-center">
                                         <div class="banner-details mt-4 mt-lg-0">
                                             <div class="post-meta-single">
-                                                <ul style={{fontFamily : "fantasy"}}>
+                                                <ul style={{ fontFamily: "fantasy" }}>
                                                     <button className='btn btn-primary' onClick={toggleFullScreen}>Activer le mode plein écran</button>
                                                     <li class="date"><i class="fa fa-clock-o"></i>{dateFormat(videoseul.created_at, 'dd/mm/yyyy')}</li>
                                                 </ul>
                                             </div>
-                                            <h2 style={{fontFamily : "fantasy"}}>{videoseul.titre}</h2>
+                                            <h2 style={{ fontFamily: "fantasy" }}>{videoseul.titre}</h2>
                                         </div>
                                     </div>
                                 </>
@@ -84,21 +84,23 @@ const Predication = () => {
                                     <div class="single-post-wrap style-white">
                                         <div class="thumb">
                                             <div className="video-overlay">
-                                                <button className="btn-video" onClick={() => handleVideoClick(vd.lien)}>.</button>
+                                                <button className="btn-video" onClick={() => handleVideoClick(vd.lien)}>
+                                                    <i className='fa fa-play'></i>
+                                                </button>
                                             </div>
                                             <iframe width="560" height="315" src={vd.lien} title="Lecteur vidéo YouTube" frameborder="0" allow="accéléromètre ; lecture automatique ; écriture dans le presse-papiers ; média chiffré ; gyroscope ; image dans l'image" allowfullscreen></iframe>
                                             <div className="modal" style={{ display: selectedVideo ? 'block' : 'none' }}>
                                                 <div className="modal-content">
-                                                    <span className="close" style={{color : "white"}} onClick={() => setSelectedVideo('')}>sssss</span>
-                                                    <iframe style={{width : '100%'}} width="10" height="100%" src={vd.lien} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <span className="close" style={{ color: "white" }} onClick={() => setSelectedVideo('')}>zzzzz</span>
+                                                    <iframe style={{ width: '100%' }} width="10" height="100%" src={vd.lien} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="details">
-                                            <h6 class="title" style={{fontFamily : "fantasy"}}><a href="#">{vd.titre}</a></h6>
+                                            <h6 class="title" style={{ fontFamily: "fantasy" }}><a href="#">{vd.titre}</a></h6>
                                             <div class="post-meta-single mt-3">
                                                 <ul>
-                                                    <li style={{fontFamily : "fantasy"}}><i class="fa fa-clock-o"></i>{dateFormat(vd.created_at, 'dd/mm/yyyy')}</li>
+                                                    <li style={{ fontFamily: "fantasy" }}><i class="fa fa-clock-o"></i>{dateFormat(vd.created_at, 'dd/mm/yyyy')}</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -150,6 +152,8 @@ const Predication = () => {
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
+            border-radius : 50%;
+            border : 5px solid red;
             background: red;
           }
 

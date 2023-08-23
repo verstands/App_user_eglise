@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 let token = `Bearer ${localStorage.getItem("token")}`;
 
@@ -8,7 +9,7 @@ export const getVideo = () => {
       return response.data.data;
     })
     .catch((error) => {
-
+        
     });
 }
 
@@ -36,6 +37,10 @@ export const getVideoId = (id) => {
       return response.data.data;
     })
     .catch((error) => {
-      alert(error)
+      if (error.response && error.response.status === 401) {
+        window.location.href = "/";
+    } else {
+        toast.error(`${error.response.data.message}`)
+    }
     });
 }

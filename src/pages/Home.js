@@ -86,15 +86,15 @@ const Home = () => {
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single-post-wrap style-overlay-bg">
                                     <div class="thumb">
-                                        <img src={seulEvenement.image} alt="img"  />
+                                        <img src={seulEvenement && seulEvenement.image} alt="img"  />
                                     </div>
                                     <div class="details">
                                         <div class="post-meta-single mb-3">
                                             <ul>
-                                                <li><Link class="tag-base tag-blue" to={`/detail/${seulEvenement.id}`}>Voir plus</Link></li>
+                                                <li><Link class="tag-base tag-blue" to={`/detail/${seulEvenement && seulEvenement.id}`}>Voir plus</Link></li>
                                                 <li>
                                                     {seulEvenement && seulEvenement.date && (
-                                                        <i class="fa fa-clock-o"> {seulEvenement.date.slice(0, 20)}</i>
+                                                        <i class="fa fa-clock-o"> {seulEvenement && seulEvenement.date.slice(0, 20)}</i>
                                                     )}
                                                 </li>
                                             </ul>
@@ -113,7 +113,7 @@ const Home = () => {
                         <div class="col-lg-6 col-sm-6">
                             <div className="row">
                                 {
-                                    Evenement.map((evTs) => {
+                                    Evenement && Evenement.map((evTs) => {
                                         return (
                                             <div className="col-md-6">
                                                 <div class="single-post-wrap">

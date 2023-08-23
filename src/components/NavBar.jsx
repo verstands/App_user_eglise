@@ -1,6 +1,6 @@
 import { colors } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { getProfile } from "./Actions/ProfileAction";
 import zIndex from "@mui/material/styles/zIndex";
 import { getVideo } from "./Actions/videoAction";
@@ -8,18 +8,32 @@ import { getVideo } from "./Actions/videoAction";
 const NavBar = () => {
     const [profile, setProfile] = useState([]);
     const [predication, setpredication] = useState([]);
+    const [predicationM, setpredicationM] = useState([]);
     const [activeL, setactive] = useState('home');
     const [searchTerm, setSearchTerm] = useState("");
+    const [searchTermM, setSearchTermM] = useState("");
     const [disNow, setdisNow] = useState('none')
+    const [disNowM, setdisNowM] = useState('none')
 
     const navFiltreRef = useRef(null);
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
-        if(searchTerm.length > 0){
+        if (searchTerm.length > 0) {
             setdisNow('block')
         }
-        if(searchTerm === ''){
+        if (searchTerm === '') {
             setdisNow('none')
+            console.log(disNow)
+        }
+    };
+
+    const handleSearchM = (event) => {
+        setSearchTermM(event.target.value);
+        if (searchTermM.length > 0) {
+            setdisNowM('block')
+        }
+        if (searchTermM === '') {
+            setdisNowM('none')
             console.log(disNow)
         }
     };
@@ -35,6 +49,7 @@ const NavBar = () => {
     useEffect(() => {
         getVideo().then((membre) => {
             setpredication(membre);
+            setpredicationM(membre);
         }).catch((error) => {
             console.log(error);
         });
@@ -56,17 +71,49 @@ const NavBar = () => {
 
     return (
         <>
+
             <div class="td-search-popup" id="td-search-popup">
                 <form action="index.html" class="search-form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search....." />
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Recherche predication..."
+                            value={searchTermM}
+                            onChange={handleSearchM}
+                        />
                     </div>
                     <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
+                    <div className="NavFiltre" style={{ display: disNowM }} ref={navFiltreRef}>
+                        {
+                            Array.isArray(predicationM) && predicationM
+                                .filter((data) => {
+                                    if (typeof data.titre !== 'string'
+                                    ) {
+                                        return false; // ignore non-string values
+                                    }
+                                    return data.titre.toLowerCase().includes(searchTermM.toLowerCase())
+
+                                })
+                                .map((pv) => {
+                                    return (
+                                        <>
+                                            <Link to={`/VideoD/${pv.id}`} style={{
+                                                color
+                                                    : "black"
+                                            }}>
+                                                <i className="fa fa-video-camera"> </i>
+                                                {pv.titre}
+                                            </Link><br />
+                                        </>
+                                    )
+                                })
+                        }
+                    </div>
                 </form>
             </div>
             <div class="body-overlay" id="body-overlay"></div>
             <div class="navbar-area">
-
                 <div class="topbar-area">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -100,7 +147,7 @@ const NavBar = () => {
                         <div class="row">
                             <div class="col-xl-6 col-lg-5 align-self-center">
                                 <div class="logo text-md-left text-center">
-                                    <a class="main-logo" href="index.html"><img src="assets/img/logo.png" alt="img" /></a>
+                                    <Link class="main-logo" to="/home"><img src="assets/img/logo.png" alt="img" /></Link>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-7 text-md-right text-center">
@@ -116,7 +163,7 @@ const NavBar = () => {
                     <div class="container nav-container">
                         <div class="responsive-mobile-menu">
                             <div class="logo d-lg-none d-block">
-                                <a class="main-logo" href="index.html"><img src="assets/img/logo.png" alt="img" /></a>
+                                <Link class="main-logo" to="/home"><img src="assets/img/logo.png" alt="img" /></Link>
                             </div>
                             <button class="menu toggle-btn d-block d-lg-none" data-target="#nextpage_main_menu"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -125,44 +172,44 @@ const NavBar = () => {
                             </button>
                         </div>
                         <div class="nav-right-part nav-right-part-mobile">
-                            <a class="search header-search" href="#"><i class="fa fa-search"></i></a>
+                            <Link class="search header-search" to="#"><i class="fa fa-search"></i></Link>
                         </div>
                         <div className="collapse navbar-collapse" id="nextpage_main_menu">
                             <ul className="navbar-nav menu-open" style={{ fontFamily: "fantasy" }}>
-                                <li className={`current-menu-item`} style={activeL === 'home' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('home')}>
-                                    <Link to={"/home"}>Accueil</Link>
+                                <li className={`current-menu-item`} >
+                                    <NavLink to={"/home"}>Accueil</NavLink>
                                 </li>
-                                <li className="current-menu-item" style={activeL === 'evenements' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('evenements')}>
-                                    <Link to="/evenements">Evenements</Link>
+                                <li className="current-menu-item" >
+                                    <NavLink to="/evenements">Evenements</NavLink>
                                 </li>
-                                <li className={`current-menu-item`} style={activeL === 'predication' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('predication')}>
-                                    <Link to={"/predication"}>Predications</Link>
+                                <li className={`current-menu-item`}>
+                                    <NavLink to={"/predication"}>Predications</NavLink>
                                 </li>
-                                <li className={`current-menu-item`} style={activeL === 'eglise' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('eglise')}>
-                                    <Link to={"/eglise"}>Notre eglise</Link>
+                                <li className={`current-menu-item`}>
+                                    <NavLink to={"/eglise"}>Notre eglise</NavLink>
                                 </li>
-                                <li className={`current-menu-item`} style={activeL === 'don' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('don')}>
-                                    <Link to={"/don"}>Don</Link>
+                                <li className={`current-menu-item`} >
+                                    <NavLink to={"/don"}>Don</NavLink>
                                 </li>
-                                <li className={`current-menu-item`} style={activeL === 'chat' ? { borderBottom: '5px solid #721c24' } : {}} onClick={() => setactive('chat')}>
-                                    <Link to={"/chat"}>forums de discussion</Link>
+                                <li className={`current-menu-item`}>
+                                    <NavLink to={"/chat"}>forums de discussion</NavLink>
                                 </li>
                             </ul>
                         </div>
                         <div class="nav-right-part nav-right-part-desktop">
                             <div class="menu-search-inner">
-                                <input 
+                                <input
                                     type="text"
-                                     placeholder="Rechercher..." 
-                                     value={searchTerm}
-                                     onChange={handleSearch}
-                                     />
+                                    placeholder="Rechercher..."
+                                    value={searchTerm}
+                                    onChange={handleSearch}
+                                />
                                 <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </div>
                 </nav>
-                <div className="NavFiltre" style={{display : disNow}} ref={navFiltreRef}>
+                <div className="NavFiltre" style={{ display: disNow }} ref={navFiltreRef}>
                     {
                         Array.isArray(predication) && predication
                             .filter((data) => {
@@ -176,11 +223,13 @@ const NavBar = () => {
                             .map((pv) => {
                                 return (
                                     <>
-                                    <Link to={`/VideoD/${pv.id}`} style={{color
-                                     : "black"}}>
-                                        <i className="fa fa-video-camera"> </i>
-                                        {pv.titre}
-                                    </Link><br />
+                                        <Link to={`/VideoD/${pv.id}`} style={{
+                                            color
+                                                : "black"
+                                        }}>
+                                            <i className="fa fa-video-camera"> </i>
+                                            {pv.titre}
+                                        </Link><br />
                                     </>
                                 )
                             })

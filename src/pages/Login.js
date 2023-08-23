@@ -35,14 +35,14 @@ const Login = () => {
             } else if (error?.response?.status === 500) {
                 setloading(false)
                 toast.error(`Erreur de la connexion`)
-            } else if (error?.response?.status === 404) {
+            } else if (error?.response?.status === 4041) {
                 setloading(false)
                 toast.error(`Service non trouvée !!!`)
             } else if (error?.response?.status === 422) {
                 setloading(false)
                 toast.error(`${error.response.data.message}`)
             } else {
-                alert(error)
+                alert(`${process.env.REACT_APP_SERVICE_API}login`)
             }
         })
     }

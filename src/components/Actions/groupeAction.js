@@ -17,7 +17,11 @@ export const getGroupe = () => {
             return response.data.data;
         })
         .catch((error) => {
-            alert(error)
+            if (error.response && error.response.status === 401) {
+                window.location.href = "/";
+            } else {
+                toast.error(`${error.response.data.message}`)
+            }
         });
 }
 export const getSeulGroupe = (id) => {
@@ -34,7 +38,11 @@ export const getSeulGroupe = (id) => {
             return response.data.data;
         })
         .catch((error) => {
-
+            if (error.response && error.response.status === 401) {
+                window.location.href = "/";
+            } else {
+                toast.error(`${error.response.data.message}`)
+            }
         });
 }
 
