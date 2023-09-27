@@ -86,7 +86,7 @@ const Home = () => {
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single-post-wrap style-overlay-bg">
                                     <div class="thumb">
-                                        <img src={seulEvenement && seulEvenement.image} alt="img"  />
+                                        <img src={seulEvenement && seulEvenement.image} />
                                     </div>
                                     <div class="details">
                                         <div class="post-meta-single mb-3">

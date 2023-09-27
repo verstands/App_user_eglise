@@ -14,6 +14,7 @@ const NavBar = () => {
     const [searchTermM, setSearchTermM] = useState("");
     const [disNow, setdisNow] = useState('none')
     const [disNowM, setdisNowM] = useState('none')
+    let token = localStorage.getItem("token");
 
     const navFiltreRef = useRef(null);
     const handleSearch = (event) => {
@@ -39,12 +40,16 @@ const NavBar = () => {
     };
 
     useEffect(() => {
-        getProfile().then((membre) => {
-            setProfile(membre);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }, []);
+        if (token) {
+            getProfile()
+                .then((membre) => {
+                    setProfile(membre);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [token]);
 
     useEffect(() => {
         getVideo().then((membre) => {
@@ -67,7 +72,6 @@ const NavBar = () => {
             document.removeEventListener("click", handleClickOutside);
         };
     }, []);
-
 
     return (
         <>
@@ -126,15 +130,20 @@ const NavBar = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-5 mt-2 mt-md-0 text-md-right text-center">
-                                <div class="topbar-social">
-                                    <ul class="social-area social-area-2">
-                                        {profile && profile.prenom && profile.nom && (
+                            <div className="col-lg-6 col-md-5 mt-2 mt-md-0 text-md-right text-center">
+                                <div className="topbar-social">
+                                    <ul className="social-area social-area-2">
+                                        {token && profile && profile.prenom && profile.nom && (
                                             <Link to={`/profile`} style={{ color: 'white', fontFamily: "fantasy" }}>
                                                 <i className="fa fa-user-circle" style={{ fontSize: 25, color: "white" }}> </i>
                                                 {profile.prenom} {profile.nom}
                                             </Link>
                                         )}
+                                        {
+                                            !token && (
+                                                <Link to='/login' className="btn btn-primary"><i className="fa fa-sign-in"></i> Se connecter</Link>
+                                            )
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -151,10 +160,36 @@ const NavBar = () => {
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-7 text-md-right text-center">
-                                <strong style={{ color: "white" }}>(1 Jean 4 : 7-8)</strong>
-                                <p style={{ fontFamily: "fantasy", color: "white" }}>
-                                    Bien-aimés, aimons nous les uns les autres; car l'amour est de Dieu, et quiconque aime est né de Dieu et connaît Dieu.
-                                </p>
+                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active" style={{padding : "10px", transition : '1.2'}}>
+                                            <strong style={{ color: "white" }}>(1 Jean 4 : 7-8)</strong>
+                                            <p style={{ fontFamily: "fantasy", color: "white" }}>
+                                                Bien-aimés, aimons nous les uns les autres; car l'amour est de Dieu, et quiconque aime est né de Dieu et connaît Dieu.
+                                            </p>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <strong style={{ color: "white" }}>(1 J 4 : 7-8)</strong>
+                                            <p style={{ fontFamily: "fantasy", color: "white" }}>
+                                                Bien-aimés, aimons nous les uns les autres; car l'amour est de Dieu, et quiconque aime est né de Dieu et connaît Dieu.
+                                            </p>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <strong style={{ color: "white" }}>(p 4 : 7-8)</strong>
+                                            <p style={{ fontFamily: "fantasy", color: "white" }}>
+                                                Bien-aimés, aimons nous les uns les autres; car l'amour est de Dieu, et quiconque aime est né de Dieu et connaît Dieu.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -191,9 +226,13 @@ const NavBar = () => {
                                 <li className={`current-menu-item`} >
                                     <NavLink to={"/don"}>Don</NavLink>
                                 </li>
-                                <li className={`current-menu-item`}>
-                                    <NavLink to={"/chat"}>forums de discussion</NavLink>
-                                </li>
+                                {
+                                    token && (
+                                        <li className={`current-menu-item`}>
+                                            <NavLink to={"/chat"}>forums de discussion</NavLink>
+                                        </li>
+                                    )
+                                }
                             </ul>
                         </div>
                         <div class="nav-right-part nav-right-part-desktop">

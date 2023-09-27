@@ -3,18 +3,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 
 function Page404() {
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/');
-    }
-  }, []);
-
-  
-  return (
+    return (
     <>
       <div class="error-header"> </div>
       <div class="container ">

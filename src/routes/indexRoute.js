@@ -17,7 +17,8 @@ class IndexRoute extends Component {
     render(){
         return(
             <Routes>
-                <Route path="/"  element={<Login />} />
+                <Route path="/"  element={<Home />} />
+                <Route path="/login"  element={<Login />} />
                 <Route path="/home"  element={<Home />} />
                 <Route path="/evenements"  element={<Evenements />} />
                 <Route path="/predication"  element={<Predication />} />

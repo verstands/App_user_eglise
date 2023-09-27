@@ -19,7 +19,7 @@ export const getChatInterne = (groupe) => {
         })
         .catch((error) => {
             if (error.response && error.response.status === 401) {
-                window.location.href = "/";
+                alert('d')
             } else {
                 toast.error(`${error.response.data.message}`)
             }

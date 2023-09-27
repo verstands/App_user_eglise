@@ -94,7 +94,7 @@ function Enregistrer() {
                                         </label>
                                     </div>
                                     <div class="w-50 text-md-right">
-                                        <Link to="/">Se connecter</Link>
+                                        <Link to="/login"><i className="fa fa-sign-in"></i> Sesss connecter</Link>
                                     </div>
                                 </div>
                                 <div class="form-group">
